@@ -3,6 +3,7 @@ import os
 from sklearn.model_selection import train_test_split
 import logging
 import yaml
+from pathlib import Path
 
 
 # Ensure the "logs" directory exists
@@ -86,10 +87,12 @@ def save_data(train_data: pd.DataFrame, test_data: pd.DataFrame, data_path: str)
 
 def main():
     try:
-        params = load_params(params_path='params.yaml')
+        project_root = Path(__file__).resolve().parents[1]
+        params_file = project_root / 'dvclive' / 'params.yaml'
+        params = load_params(params_path=str(params_file))
         test_size = params['data_ingestion']['test_size']
         # test_size = 0.2
-        data_path = 'https://raw.githubusercontent.com/vikashishere/Datasets/main/spam.csv'
+        data_path = 'https://raw.githubusercontent.com/bishalanand/Ml-ops-dvc-with-aws/refs/heads/main/experiments/spam.csv'
         df = load_data(data_url=data_path)
         final_df = preprocess_data(df)
         train_data, test_data = train_test_split(final_df, test_size=test_size, random_state=2)
