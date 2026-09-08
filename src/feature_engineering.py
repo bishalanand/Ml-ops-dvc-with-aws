@@ -3,6 +3,7 @@ import os
 from sklearn.feature_extraction.text import TfidfVectorizer
 import logging
 import yaml
+from pathlib import Path
 
 # Ensure the "logs" directory exists
 log_dir = 'logs'
@@ -94,7 +95,10 @@ def save_data(df: pd.DataFrame, file_path: str) -> None:
 
 def main():
     try:
-        params = load_params(params_path='params.yaml')
+        # Locate project root (parent of `src`) and load dvclive/params.yaml
+        project_root = Path(__file__).resolve().parents[1]
+        params_file = project_root / 'dvclive' / 'params.yaml'
+        params = load_params(params_path=str(params_file))
         max_features = params['feature_engineering']['max_features']
         # max_features = 50
 
