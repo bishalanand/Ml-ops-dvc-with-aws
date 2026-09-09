@@ -1,0 +1,7 @@
+2026-09-10 01:45:36,166 - model_evaluation - ERROR - Unexpected error:'Logger' object has no attribute 'debud'
+2026-09-10 01:45:36,168 - model_evaluation - ERROR - Failed to complete the model evaluation process: 'Logger' object has no attribute 'debud'
+2026-09-10 01:46:15,237 - model_evaluation - DEBUG - Parameters are retrieved from C:\Users\bisha\OneDrive\Desktop\Mlops\Ml-ops-dvc-with-aws\dvclive\params.yaml
+2026-09-10 01:46:16,600 - model_evaluation - DEBUG - model loaded from ./models/model.pkl
+2026-09-10 01:46:16,619 - model_evaluation - DEBUG - Data Loaded from ./data/processed/test_tfidf.csv
+2026-09-10 01:46:16,665 - model_evaluation - DEBUG - Model evaluated competed
+2026-09-10 01:46:24,952 - model_evaluation - DEBUG - Metrics saved to file reports/metrics.json
