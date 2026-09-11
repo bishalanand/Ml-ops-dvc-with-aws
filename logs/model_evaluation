@@ -20,3 +20,13 @@
 2026-09-12 01:25:36,619 - model_evaluation - DEBUG - Data Loaded from ./data/processed/test_tfidf.csv
 2026-09-12 01:25:36,642 - model_evaluation - DEBUG - Model evaluated competed
 2026-09-12 01:25:37,423 - model_evaluation - DEBUG - Metrics saved to file reports/metrics.json
+2026-09-12 01:34:25,131 - model_evaluation - DEBUG - Parameters are retrieved from C:\Users\bisha\OneDrive\Desktop\Mlops\Ml-ops-dvc-with-aws\params.yaml
+2026-09-12 01:34:25,259 - model_evaluation - DEBUG - model loaded from ./models/model.pkl
+2026-09-12 01:34:25,265 - model_evaluation - DEBUG - Data Loaded from ./data/processed/test_tfidf.csv
+2026-09-12 01:34:25,286 - model_evaluation - DEBUG - Model evaluated competed
+2026-09-12 01:34:25,945 - model_evaluation - DEBUG - Metrics saved to file reports/metrics.json
+2026-09-12 01:38:51,607 - model_evaluation - DEBUG - Parameters are retrieved from C:\Users\bisha\OneDrive\Desktop\Mlops\Ml-ops-dvc-with-aws\params.yaml
+2026-09-12 01:38:51,815 - model_evaluation - DEBUG - model loaded from ./models/model.pkl
+2026-09-12 01:38:51,827 - model_evaluation - DEBUG - Data Loaded from ./data/processed/test_tfidf.csv
+2026-09-12 01:38:51,866 - model_evaluation - DEBUG - Model evaluated competed
+2026-09-12 01:38:52,833 - model_evaluation - DEBUG - Metrics saved to file reports/metrics.json
