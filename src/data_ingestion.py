@@ -88,15 +88,16 @@ def save_data(train_data: pd.DataFrame, test_data: pd.DataFrame, data_path: str)
 def main():
     try:
         project_root = Path(__file__).resolve().parents[1]
-        params_file = project_root / 'dvclive' / 'params.yaml'
+        params_file = project_root / 'params.yaml'
         params = load_params(params_path=str(params_file))
         test_size = params['data_ingestion']['test_size']
-        # test_size = 0.2
-        data_path = 'https://raw.githubusercontent.com/bishalanand/Ml-ops-dvc-with-aws/refs/heads/main/experiments/spam.csv'
-        df = load_data(data_url=data_path)
+
+        source_data = project_root / 'experiments' / 'spam.csv'
+        df = load_data(data_url=str(source_data))
         final_df = preprocess_data(df)
+
         train_data, test_data = train_test_split(final_df, test_size=test_size, random_state=2)
-        save_data(train_data, test_data, data_path='./data')
+        save_data(train_data, test_data, data_path=str(project_root / 'data'))
     except Exception as e:
         logger.error('Failed to complete the data ingestion process: %s', e)
         print(f"Error: {e}")

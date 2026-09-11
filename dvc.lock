@@ -1,0 +1,114 @@
+schema: '2.0'
+stages:
+  data_ingestion:
+    cmd: python src/data_ingestion.py
+    deps:
+    - path: experiments/spam.csv
+      hash: md5
+      md5: f10885f3e274a202196a88cb8bb3e15e
+      size: 499322
+    - path: params.yaml
+      hash: md5
+      md5: b762be86bb59dbd6514d8ea3a6fdc9ca
+      size: 133
+    - path: src/data_ingestion.py
+      hash: md5
+      md5: 80c8264734f31112059c8b01a796da21
+      size: 3650
+    params:
+      params.yaml:
+        data_ingestion.test_size: 0.2
+    outs:
+    - path: data/raw
+      hash: md5
+      md5: 1a287d34dc172d9f950c03dae35f7e73.dir
+      size: 484846
+      nfiles: 2
+  data_preprocessing:
+    cmd: python src/data_preprocessing.py
+    deps:
+    - path: data/raw
+      hash: md5
+      md5: 1a287d34dc172d9f950c03dae35f7e73.dir
+      size: 484846
+      nfiles: 2
+    - path: src/data_preprocessing.py
+      hash: md5
+      md5: ae0059b79590609927f72e3c373f1865
+      size: 3973
+    outs:
+    - path: data/interim
+      hash: md5
+      md5: 095c39a135aaa52ea387aa07dc186926.dir
+      size: 260230
+      nfiles: 2
+  feature_engineering:
+    cmd: python src/feature_engineering.py
+    deps:
+    - path: data/interim
+      hash: md5
+      md5: 095c39a135aaa52ea387aa07dc186926.dir
+      size: 260230
+      nfiles: 2
+    - path: params.yaml
+      hash: md5
+      md5: b762be86bb59dbd6514d8ea3a6fdc9ca
+      size: 133
+    - path: src/feature_engineering.py
+      hash: md5
+      md5: 1647a2a9ba91129720c42407b5c63676
+      size: 4141
+    params:
+      params.yaml:
+        feature_engineering.max_features: 35
+    outs:
+    - path: data/processed
+      hash: md5
+      md5: 746644b26abe11ed2fd7ea27c1d35686.dir
+      size: 834765
+      nfiles: 2
+  model_building:
+    cmd: python src/model_building.py
+    deps:
+    - path: data/processed
+      hash: md5
+      md5: 746644b26abe11ed2fd7ea27c1d35686.dir
+      size: 834765
+      nfiles: 2
+    - path: params.yaml
+      hash: md5
+      md5: b762be86bb59dbd6514d8ea3a6fdc9ca
+      size: 133
+    - path: src/model_building.py
+      hash: md5
+      md5: f8e73e2869a2bbe63a7e9fec165f85b4
+      size: 4576
+    params:
+      params.yaml:
+        model_building.n_estimators: 22
+        model_building.random_state: 2
+    outs:
+    - path: models/model.pkl
+      hash: md5
+      md5: 4c17b369a252f3602b9f5cbd9aa14a7e
+      size: 720147
+  model_evaluation:
+    cmd: python src/model_evaluation.py
+    deps:
+    - path: data/processed/test_tfidf.csv
+      hash: md5
+      md5: c8463b4a89a87cce86ec622378e2a1b2
+      size: 174611
+    - path: models/model.pkl
+      hash: md5
+      md5: 4c17b369a252f3602b9f5cbd9aa14a7e
+      size: 720147
+    - path: src/model_evaluation.py
+      hash: md5
+      md5: fddcacce847785b5c12688acafe31d25
+      size: 4588
+    outs:
+    - path: reports/metrics.json
+      hash: md5
+      md5: abba219d58644dde3de017d8eedbd8b8
+      size: 145

@@ -106,7 +106,7 @@ def save_metrics(metrics:dict,file_path:str)->None:
 def main():
     try:
         project_root = Path(__file__).resolve().parents[1]
-        params_file = project_root / 'dvclive' / 'params.yaml'
+        params_file = project_root / 'params.yaml'
         params = load_params(params_path=str(params_file))
         clf=load_model('./models/model.pkl')
         test_data=load_data('./data/processed/test_tfidf.csv')
@@ -115,10 +115,12 @@ def main():
         y_test=test_data.iloc[:,-1].values
         
         metrics=evaluate_model(clf,x_test,y_test)
+        y_pred = clf.predict(x_test)
         with Live(save_dvc_exp=True) as live:
-            live.log_metric('accuracy', accuracy_score(y_test, y_test))
-            live.log_metric('precision', precision_score(y_test, y_test))
-            live.log_metric('recall', recall_score(y_test, y_test))
+            live.log_metric('accuracy', accuracy_score(y_test, y_pred))
+            live.log_metric('precision', precision_score(y_test, y_pred))
+            live.log_metric('recall', recall_score(y_test, y_pred))
+            live.log_metric('auc', roc_auc_score(y_test, clf.predict_proba(x_test)[:, 1]))
 
             live.log_params(params)
         
@@ -128,6 +130,6 @@ def main():
         print(f"Error: {e}")
 
 if __name__ == '__main__':
-    main()        
-        
+    main()
+
 
